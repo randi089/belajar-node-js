@@ -1,9 +1,11 @@
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const port = 3000;
 
 // gunakan ejs
 app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 app.get("/", (req, res) => {
   const mahasiswa = [
@@ -21,6 +23,7 @@ app.get("/", (req, res) => {
     },
   ];
   res.render("index", {
+    layout: "layouts/main-layout",
     nama: "Randi Febriadi",
     title: "Halaman Home",
     mahasiswa,
@@ -28,11 +31,17 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { title: "Halaman About" });
+  res.render("about", {
+    layout: "layouts/main-layout",
+    title: "Halaman About",
+  });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Halaman Contact" });
+  res.render("contact", {
+    layout: "layouts/main-layout",
+    title: "Halaman Contact",
+  });
 });
 
 app.get("/product/:id", (req, res) => {
