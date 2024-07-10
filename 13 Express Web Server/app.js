@@ -2,24 +2,37 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+// gunakan ejs
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
-  // res.send("<h1>Hello World!</h1>");
-  // res.json({
-  //   nama: "Randi",
-  //   email: "randi@gmail.com",
-  //   noHP: "0853",
-  // });
-  res.sendFile("./index.html", { root: __dirname });
+  const mahasiswa = [
+    {
+      nama: "Randi Febriadi",
+      email: "randifebriadi@gmail.com",
+    },
+    {
+      nama: "Tasya Aryati Sakinah",
+      email: "tasyaaryati@gmail.com",
+    },
+    {
+      nama: "Rumzi Rahman",
+      email: "rumzirahman@gmail.com",
+    },
+  ];
+  res.render("index", {
+    nama: "Randi Febriadi",
+    title: "Halaman Home",
+    mahasiswa,
+  });
 });
 
 app.get("/about", (req, res) => {
-  // res.send("Ini adalah halaman About");
-  res.sendFile("./about.html", { root: __dirname });
+  res.render("about", { title: "Halaman About" });
 });
 
 app.get("/contact", (req, res) => {
-  // res.send("Ini adalah halaman Contact");
-  res.sendFile("./contact.html", { root: __dirname });
+  res.render("contact", { title: "Halaman Contact" });
 });
 
 app.get("/product/:id", (req, res) => {
@@ -37,41 +50,3 @@ app.use("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-// const http = require("http");
-// const fs = require("fs");
-
-// const renderHTML = (path, res) => {
-//   fs.readFile(path, (err, data) => {
-//     if (err) {
-//       res.writeHead(404);
-//       res.write("File not found!");
-//     } else {
-//       res.write(data);
-//     }
-//     res.end();
-//   });
-// };
-
-// http
-//   .createServer((req, res) => {
-//     res.writeHead(200, {
-//       "Content-Type": "text/html",
-//     });
-
-//     const url = req.url;
-//     switch (url) {
-//       case "/about":
-//         renderHTML("./about.html", res);
-//         break;
-//       case "/contact":
-//         renderHTML("./contact.html", res);
-//         break;
-//       default:
-//         renderHTML("./index.html", res);
-//         break;
-//     }
-//   })
-//   .listen(3000, () => {
-//     console.log("Server is listening on port 3000..");
-//   });
