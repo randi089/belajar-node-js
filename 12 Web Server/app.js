@@ -1,6 +1,18 @@
 const http = require("http");
 const fs = require("fs");
 
+const renderHTML = (path, res) => {
+  fs.readFile(path, (err, data) => {
+    if (err) {
+      res.writeHead(404);
+      res.write("File not found!");
+    } else {
+      res.write(data);
+    }
+    res.end();
+  });
+};
+
 http
   .createServer((req, res) => {
     res.writeHead(200, {
@@ -9,30 +21,11 @@ http
 
     const url = req.url;
     if (url === "/about") {
-      //   res.write("<h1>Ini Adalah Halaman About</h1>");
-      fs.readFile("./about.html", (err, data) => {
-        if (err) {
-          res.writeHead(404);
-          res.write("File not found!");
-        } else {
-          res.write(data);
-        }
-        res.end();
-      });
+      renderHTML("./about.html", res);
     } else if (url === "/contact") {
-      res.write("<h1>Ini Adalah Halaman Contact</h1>");
-      res.end();
+      renderHTML("./contact.html", res);
     } else {
-      //   res.write("Hello World!");
-      fs.readFile("./index.html", (err, data) => {
-        if (err) {
-          res.writeHead(404);
-          res.write("File not found!");
-        } else {
-          res.write(data);
-        }
-        res.end();
-      });
+      renderHTML("./index.html", res);
     }
   })
   .listen(3000, () => {
