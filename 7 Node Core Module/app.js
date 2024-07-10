@@ -27,7 +27,6 @@ const fs = require("fs");
 
 // Readline
 const readline = require("readline");
-const { json } = require("stream/consumers");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,

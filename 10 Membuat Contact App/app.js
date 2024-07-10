@@ -26,14 +26,6 @@ const tulisPertanyaan = (pertanyaan) => {
   });
 };
 
-// const pertanyaan2 = () => {
-//   return new Promise((resolve, reject) => {
-//     rl.question("Masukkan email anda : ", (email) => {
-//       resolve(email);
-//     });
-//   });
-// };
-
 const main = async () => {
   const nama = await tulisPertanyaan("Masukkan nama anda : ");
   const email = await tulisPertanyaan("Masukkan email anda : ");
@@ -52,18 +44,3 @@ const main = async () => {
 };
 
 main();
-
-// rl.question("Masukkan nama anda : ", (nama) => {
-//   rl.question("Masukkan No HP anda : ", (nohp) => {
-//     const contact = { nama, nohp };
-//     const file = fs.readFileSync("data/contacts.json", "utf-8");
-//     const contacts = JSON.parse(file);
-
-//     contacts.push(contact);
-
-//     fs.writeFileSync("data/contacts.json", JSON.stringify(contacts, null, 2));
-
-//     console.log("Terimakasih sudah memasukkan data!");
-//     rl.close();
-//   });
-// });
