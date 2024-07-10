@@ -1,11 +1,29 @@
-const { tulisPertanyaan, simpanContact } = require("./contacts");
+const yargs = require("yargs");
+const { simpanContact } = require("./contacts");
 
-const main = async () => {
-  const nama = await tulisPertanyaan("Masukkan nama anda : ");
-  const email = await tulisPertanyaan("Masukkan email anda : ");
-  const nohp = await tulisPertanyaan("Masukkan no HP anda : ");
+yargs.command({
+  command: "add",
+  describe: "Menambahkan contact baru",
+  builder: {
+    nama: {
+      describe: "Nama lengkap",
+      demandOption: true,
+      type: "string",
+    },
+    email: {
+      describe: "Email",
+      demandOption: false,
+      type: "string",
+    },
+    noHP: {
+      describe: "No HP",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    simpanContact(argv.nama, argv.email, argv.noHP);
+  },
+});
 
-  simpanContact(nama, email, nohp);
-};
-
-main();
+yargs.parse();
