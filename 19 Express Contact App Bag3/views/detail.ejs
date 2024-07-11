@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <h2 class="my-3 ">Detail Contact</h2>
             <% if (!contact) { %>
-              <div class="alert alert-danger fw-bold text-center" role="alert">
+              <div class="alert alert-warnbtn-warning fw-bold text-center" role="alert">
                 Contact tidak ada.<br><a href="/contact" class="alert-link fw-normal">&laquo; Kembali</a>
               </div>
             <% } else { %>
@@ -12,6 +12,7 @@
                   <h5 class="card-title"><%= contact.nama; %></h5>
                   <h6 class="card-subtitle mb-2 text-muted"><%= contact.nohp; %></h6>
                   <p class="card-text"><%= contact.email; %></p>
+                  <a href="/contact/edit/<%= contact.nama; %>" class="btn btn-info badge">Ubah</a>
                   <a href="/contact/delete/<%= contact.nama; %>" class="btn btn-danger badge" onclick="return confirm('Yakin?')">Hapus</a>
                   <a href="/contact" class="card-link d-block mt-3">&laquo; Kembali</a>
                 </div>
